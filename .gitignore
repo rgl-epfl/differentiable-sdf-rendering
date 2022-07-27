@@ -1,0 +1,17 @@
+__pycache__/
+.DS_Store
+.env
+.ipynb_checkpoints
+.python-version
+.venv
+.vscode/
+*.py[cod]
+*$py.class
+env.bak/
+env/
+ENV/
+outputs
+outputs_new
+outputs_old
+venv.bak/
+venv/
