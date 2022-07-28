@@ -7,8 +7,6 @@ import subprocess
 import sys
 __SCRIPT_DIR = os.path.realpath(os.path.dirname(__file__))
 sys.path.append(join(__SCRIPT_DIR, '../python/'))
-sys.path.insert(0, join(__SCRIPT_DIR, '../../../mitsuba3/build/python/'))
-# sys.path.insert(0, join(__SCRIPT_DIR, '../../mitsuba3-sdf/build/python/'))
 del __SCRIPT_DIR
 
 import numpy as np
