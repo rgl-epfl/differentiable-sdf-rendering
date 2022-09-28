@@ -10,7 +10,7 @@ import tqdm
 
 from constants import SCENE_DIR
 from create_video import create_video
-from util import dump_metadata, render_turntable, resize_img
+from util import dump_metadata, render_turntable, resize_img, set_sensor_res
 
 
 def load_ref_images(paths, multiscale=False):
@@ -42,8 +42,7 @@ def optimize_shape(scene_config, mts_args, ref_image_paths,
 
     # Load scene, currently handle SDF shape separately from Mitsuba scene
     sdf_scene = mi.load_file(ref_scene_name, shape_file='dummysdf.xml', sdf_filename=join(SCENE_DIR, 'sdfs', 'bunny_64.vol'),
-                             integrator=config.integrator, resx=scene_config.resx, resy=scene_config.resy,
-                             edge_epsilon=config.edge_epsilon, **mts_args)
+                             integrator=config.integrator, resx=scene_config.resx, resy=scene_config.resy, **mts_args)
     sdf_object = sdf_scene.integrator().sdf
     sdf_scene.integrator().warp_field = config.get_warpfield(sdf_object)
 
@@ -65,8 +64,7 @@ def optimize_shape(scene_config, mts_args, ref_image_paths,
 
     # Set initial rendering resolution
     for sensor in scene_config.sensors:
-        sensor.film().set_size(scene_config.init_res)
-        sensor.parameters_changed()
+        set_sensor_res(sensor, scene_config.init_res)
 
     opt_image_dir = join(output_dir, 'opt')
     os.makedirs(opt_image_dir, exist_ok=True)

@@ -145,10 +145,9 @@ def get_regular_cameras_top(n_sensors, angle_shift=0.0, resx=128, resy=128, radi
 
 def set_sensor_res(sensor, res):
     """Sets the resolution of an existing Mitsuba sensor"""
-    sensor.film().set_size(res)
-    sensor.film().set_crop_window([0, 0], res)
-    sensor.parameters_changed()
-
+    params = mi.traverse(sensor)
+    params['film.size'] = res
+    params.update()
 
 def dump_metadata(config, opt_config, extra=None, fn='test.json'):
     """Dumps out config and optimization config to a JSON file"""
