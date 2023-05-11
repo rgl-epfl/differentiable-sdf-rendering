@@ -42,7 +42,7 @@ def optimize_shape(scene_config, mts_args, ref_image_paths,
 
     # Load scene, currently handle SDF shape separately from Mitsuba scene
     sdf_scene = mi.load_file(ref_scene_name, shape_file='dummysdf.xml', sdf_filename=join(SCENE_DIR, 'sdfs', 'bunny_64.vol'),
-                             integrator=config.integrator, resx=scene_config.resx, resy=scene_config.resy, **mts_args)
+                             integrator=config.integrator, resx=scene_config.resx, resy=scene_config.resy, **mts_args, parallel=config.use_parallel_loading)
     sdf_object = sdf_scene.integrator().sdf
     sdf_scene.integrator().warp_field = config.get_warpfield(sdf_object)
 

@@ -29,6 +29,10 @@ class BaseConfig:
         self.geom_clamp_threshold = 0.05
         self.warp_weight_strategy = 6
 
+        # Mitsuba's parallel scene loading can cause issues in combination with our SDFs. 
+        # We therefore disable it by default.
+        self.use_parallel_loading = False
+
     def get_warpfield(self, sdf_object):
         warp = WarpField2D(sdf_object, weight_strategy=self.warp_weight_strategy,
                            edge_eps=self.edge_epsilon)
